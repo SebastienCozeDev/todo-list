@@ -9,7 +9,24 @@
 <body>
     <h1>Todo List</h1>
     <article>
-        <h3>Tâches</h3>
+        <h2>Créer une tâche</h2>
+        <form action="/task" method="POST">
+            <div>
+                <label for="task">Nom de la tâche</label>
+            </div>
+            <br>
+            <div>
+                <input type="text" name="task" id="task" placeholder="Entrez le nom de la nouvelle tâche" autofocus>
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Ajouter">
+            </div>
+        </form>
+    </article>
+    <hr>
+    <article>
+        <h2>Liste des tâches</h2>
         <ul>
             <% tasks.forEach((task) => { %> 
                 <% if (task.done) { %>
