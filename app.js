@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const post = 3000;
+const port = 3000;
 
 const tasks = [
     {
