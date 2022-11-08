@@ -2,6 +2,17 @@ const express = require('express');
 const app = express();
 const post = 3000;
 
+const tasks = [
+    {
+        title: "Apprendre à programmer",
+        done: false,
+    },
+    {
+        title: "Faire les courses",
+        done: true,
+    },
+];
+
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
