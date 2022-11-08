@@ -11,12 +11,17 @@
     <article>
         <h3>Tâches</h3>
         <ul>
-            <li>
-                Title | <a href="#">Terminé</a>
-            </li>
-            <li>
-                <s>Title</s> | <a href="#">Terminé</a>
-            </li>
+            <% tasks.forEach((task) => { %> 
+                <% if (task.done) { %>
+                    <li>
+                        <s><%= task.title %></s>  | <a href="#">Supprimer</a>
+                    </li>
+                <% } else { %>
+                    <li>
+                        <%= task.title %>  | <a href="#">Marquer comme supprimée</a>
+                    </li>
+                <% } %> 
+            <% }) %> 
         </ul>
     </article>
 </body>

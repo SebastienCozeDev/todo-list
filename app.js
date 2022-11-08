@@ -16,7 +16,7 @@ const tasks = [
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render('todolist');
+    res.render('todolist', { tasks });
 })
 
 app.listen(port, () => {
