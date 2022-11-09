@@ -76,6 +76,10 @@ app.get('/', (req, res) => {
     });
 })
 
+app.use((req, res) => {
+    res.redirect('/');
+});
+
 app.listen(port, () => {
     console.log(`Server running at http://127.0.0.1:${port}`);
 });
