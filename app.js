@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const fs = require('fs');
 const app = express();
 const port = 3000;
 const actualYear = new Date().getFullYear();
@@ -10,8 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const logRequest = (req, res, next) => {
-    console.log(`> ${new Date().toLocaleTimeString()} - ${req.ip} - [${req.method}] ${req.originalUrl}`);
-    req.user = { id: 5 };
+    fs.open('request.log', 'w', () => {
+        fs.appendFile('request.log', `> ${new Date().toLocaleTimeString()} - ${req.ip} - [${req.method}] ${req.originalUrl}`, function (err) {});
+    });
     next();
 };
 
