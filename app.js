@@ -1,8 +1,10 @@
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const port = 3000;
 const actualYear = new Date().getFullYear();
 
+/*
 const tasks = [
     {
         title: "Apprendre à programmer",
@@ -13,40 +15,68 @@ const tasks = [
         done: true,
     },
 ];
+*/
 
 app.use('/static', express.static('public'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+const expiryDate = new Date( Date.now() + 60 * 60 * 1000 );
+app.use(session({
+    secret: 'CA5D315486AD34CDA99A166D4943C',
+    resave: false,
+    saveUninitialized: true,
+    path: 'cookie/todolist',
+    expires: expiryDate,
+}));
+
 app.set('view engine', 'ejs');
 
 app.post('/task', (req, res) => {
     if (req.body.task) {
-        tasks.push({
+        req.session.tasks.push({
             title: req.body.task,
             done: false
         });
     };
+    console.log(req.session.tasks);
     res.redirect('/');
 });
 
 app.get('/task/:id/done', (req, res) => {
-    if (tasks[req.params.id]) {
-        tasks[req.params.id].done = true;
+    if (req.session.tasks[req.params.id]) {
+        req.session.tasks[req.params.id].done = true;
     }
+    console.log(req.session.tasks);
     res.redirect('/');
 });
 
 app.get('/task/:id/delete', (req, res) => {
-    if (tasks[req.params.id]) {
-        tasks.splice(req.params.id, 1);
+    if (req.session.tasks[req.params.id]) {
+        req.session.tasks.splice(req.params.id, 1);
     }
+    console.log(req.session.tasks);
     res.redirect('/');
 });
 
 app.get('/', (req, res) => {
-    res.render('todolist', { tasks, actualYear });
+    console.log(req.session.tasks);
+    if (!req.session.tasks) {
+        req.session.tasks = [
+            {
+                title: "Aller sur Todo List",
+                done: true,
+            },
+            {
+                title: "Ajouter mes premières tâches",
+                done: false,
+            },
+        ];
+        req.session.cookie = true;
+    }
+    console.log(req.session.tasks);
+    res.render('todolist', { tasks: req.session.tasks, actualYear, cookie });
 })
 
 app.listen(port, () => {
