@@ -22,13 +22,10 @@ app.use('/static', express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const expiryDate = new Date( Date.now() + 60 * 60 * 1000 );
 app.use(session({
     secret: 'CA5D315486AD34CDA99A166D4943C',
     resave: false,
     saveUninitialized: true,
-    path: 'cookie/todolist',
-    expires: expiryDate,
 }));
 
 app.set('view engine', 'ejs');
@@ -73,10 +70,13 @@ app.get('/', (req, res) => {
                 done: false,
             },
         ];
-        req.session.cookie = true;
     }
     console.log(req.session.tasks);
-    res.render('todolist', { tasks: req.session.tasks, actualYear, cookie });
+    res.render('todolist', {
+        tasks: req.session.tasks,
+        actualYear,
+        agreeWithCookie: req.session.agreeWithCookie,
+    });
 })
 
 app.listen(port, () => {
