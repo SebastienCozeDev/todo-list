@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const actualYear = new Date().getFullYear();
 
 const tasks = [
     {
@@ -29,7 +30,7 @@ app.post('/task', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.render('todolist', { tasks });
+    res.render('todolist', { tasks, actualYear });
 })
 
 app.listen(port, () => {
