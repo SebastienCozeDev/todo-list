@@ -59,9 +59,9 @@
         <article class="box content">
             <h2>Liste des tâches</h2>
             <table>
-                <% tasks.forEach((task)=> { %>
-                    <% if (task.done) { %>
-                        <tr>
+                <% tasks.forEach((task, idx)=> { %>
+                    <tr>
+                        <% if (task.done) { %>
                             <td>
                                 <s>
                                     <%= task.title %>
@@ -70,18 +70,16 @@
                             <td>
                                 <a class="button is-danger is-light is-b-1" href="#">Supprimer</a>
                             </td>
-                        </tr>
-                    <% } else { %>
-                        <tr>
+                        <% } else { %>
                             <td>
                                 <%= task.title %>
                             </td>
                             <td>
-                                <a class="button is-link is-light is-b-1" href="#">Marquer comme terminée</a>
+                                <a class="button is-link is-light is-b-1" href="/task/<%= idx %>/done/">Marquer comme terminée</a>
                             </td>
-                        </tr>
                         <% } %>
-                    <% }) %>
+                    </tr>
+                <% }) %>
             </table>
         </article>
     </main>
