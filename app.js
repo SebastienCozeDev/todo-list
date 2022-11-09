@@ -4,23 +4,18 @@ const app = express();
 const port = 3000;
 const actualYear = new Date().getFullYear();
 
-/*
-const tasks = [
-    {
-        title: "Apprendre à programmer",
-        done: false,
-    },
-    {
-        title: "Faire les courses",
-        done: true,
-    },
-];
-*/
-
 app.use('/static', express.static('public'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+const logRequest = (req, res, next) => {
+    console.log(`> ${new Date().toLocaleTimeString()} - ${req.ip} - [${req.method}] ${req.originalUrl}`);
+    req.user = { id: 5 };
+    next();
+};
+
+app.use(logRequest);
 
 app.use(session({
     secret: 'CA5D315486AD34CDA99A166D4943C',
@@ -37,7 +32,6 @@ app.post('/task', (req, res) => {
             done: false
         });
     };
-    console.log(req.session.tasks);
     res.redirect('/');
 });
 
@@ -45,7 +39,6 @@ app.get('/task/:id/done', (req, res) => {
     if (req.session.tasks[req.params.id]) {
         req.session.tasks[req.params.id].done = true;
     }
-    console.log(req.session.tasks);
     res.redirect('/');
 });
 
@@ -53,12 +46,15 @@ app.get('/task/:id/delete', (req, res) => {
     if (req.session.tasks[req.params.id]) {
         req.session.tasks.splice(req.params.id, 1);
     }
-    console.log(req.session.tasks);
+    res.redirect('/');
+});
+
+app.get('/agree', (req, res) => {
+    req.session.agreeWithCookie = true;
     res.redirect('/');
 });
 
 app.get('/', (req, res) => {
-    console.log(req.session.tasks);
     if (!req.session.tasks) {
         req.session.tasks = [
             {
@@ -71,7 +67,6 @@ app.get('/', (req, res) => {
             },
         ];
     }
-    console.log(req.session.tasks);
     res.render('todolist', {
         tasks: req.session.tasks,
         actualYear,
