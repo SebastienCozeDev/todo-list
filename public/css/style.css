@@ -1,0 +1,33 @@
+body {
+    background-color: #e3f6f5;
+}
+
+header {
+    margin-bottom: 1rem;
+}
+
+main {
+    flex-grow: 1;
+    margin: auto;
+    max-width: 1024px;
+}
+
+td {
+    margin: auto;
+}
+
+.box {
+    margin: 1rem;
+}
+
+.is-b-1 {
+    width: 100%;
+}
+
+.button, .input {
+    border-radius: 30px;
+}
+
+.footer {
+    margin-top: 3rem;
+}
