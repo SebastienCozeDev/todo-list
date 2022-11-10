@@ -63,7 +63,7 @@
         <hr>
         <article class="box content">
             <h2>Liste des tâches</h2>
-            <table>
+            <table id="responsive-only-desktop">
                 <% tasks.forEach((task, idx)=> { %>
                     <tr>
                         <% if (task.done) { %>
@@ -86,6 +86,32 @@
                     </tr>
                 <% }) %>
             </table>
+            <div id="responsive-only-smartphone">
+                <% tasks.forEach((task, idx)=> { %>
+                    <ul>
+                        <% if (task.done) { %>
+                            <li>
+                                <s>
+                                    <%= task.title %>
+                                </s>
+                            </li>
+                            <li>
+                                <a class="button is-danger is-light is-b-1" href="/task/<%= idx %>/delete/">Supprimer</a>
+                            </li>
+                        <% } else { %>
+                            <li>
+                                <%= task.title %>
+                            </li>
+                            <li>
+                                <a class="button is-link is-light is-b-1" href="/task/<%= idx %>/done/">Marquer comme terminée</a>
+                            </li>
+                        <% } %>
+                        <% if (idx != tasks.length - 1)  {%>
+                            <hr>
+                        <% } %>
+                    </ul>
+                <% }) %>
+            </div>
         </article>
     </main>
     <footer class="footer">
@@ -94,7 +120,7 @@
                 © Copyright <%= actualYear %>  <a href="https://sebastiencozedev.github.io/e-portfolio/" target="_blank" rel="noopener noreferrer">Coze Sébastien</a>
             </p>
         </div>
-      </footer>
+    </footer>
+    <script src="/static/js/responsive.js"></script>
 </body>
-
 </html>

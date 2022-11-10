@@ -11,6 +11,12 @@ td {
     margin: auto;
 }
 
+.content ul {
+    list-style: none;
+    text-align: center;
+    line-height: 2.5em;
+}
+
 .box {
     margin: 1rem;
 }
