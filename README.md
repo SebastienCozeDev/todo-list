@@ -1,9 +1,9 @@
-# Todo List
+# 📋 Todo List
 
-Ce projet consiste à créer une application web permettant de gérer sa liste de tâches à effectuer. Chaque Todo List est unique pour chaque session.
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Express.js](https://img.shields.io/badge/Express.js-4.18.2-yellow.svg)
+![EJS](https://img.shields.io/badge/EJS-3.1.8-green.svg)
+![express-session](https://img.shields.io/badge/express--session-1.17.3-yellow.svg)
 
-## Packages utilisés
-
-- [ejs](https://www.npmjs.com/package/ejs) étant le moteur de templates utilisé.
-- [express](https://www.npmjs.com/package/express) étant le framework utilisé.
-- [express-session](https://www.npmjs.com/package/express-session) permettant d'utiliser les sessions avec [express](https://www.npmjs.com/package/express).
+## 📝 Description
+This project involves creating a web application to manage your to-do list. Each Todo List is unique for each session.
